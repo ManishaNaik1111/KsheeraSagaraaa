@@ -1,64 +1,90 @@
 # 🐄 KsheeraSagara – Dairy Farm Management App
 
-An Android app that helps small dairy farmers track milk income, expenses and cattle, and see their monthly profit or loss at a glance. Built with **Kotlin** and **Jetpack Compose**, works **offline**, and supports **5 languages**.
+KsheeraSagara is an Android application developed to help small-scale dairy farmers manage their daily dairy operations, track milk income and expenses, monitor cattle records, and calculate monthly profit or loss.
 
-## ✨ Features
+The application provides an organized way to maintain dairy-related financial records through a simple and user-friendly interface. It supports offline data storage and multiple languages.
 
-- **Milk income log:** record litres, fat percentage and rate per litre; total income is calculated automatically
-- **Expense tracking:** categories for Fodder, Medical, Labour, Electricity and Others
-- **Cow management:** add cows with name and breed, mark them active or inactive, and view income and expenses per cow
-- **Monthly summary:** total income, total expense, net profit, litres sold and a pie-chart breakdown
-- **Milk calendar and vaccination screens** to keep daily records and health schedules organized
-- **Financial literacy tips** with expandable cards
-- **PDF monthly report** that can be shared through WhatsApp or any app
-- **Daily reminders** using WorkManager notifications
-- **4 languages:** English, Kannada (ಕನ್ನಡ), Hindi (हिन्दी), Marathi (मराठी)
-- **Dark mode** and a first-run onboarding flow
+## ✨ Key Features
 
-## 🏗️ Architecture
+- **Milk Income Tracking:** Record milk quantity, fat percentage, and rate per litre with automatic income calculation.
+- **Expense Management:** Track daily expenses across categories such as fodder, medical, labour, electricity, and others.
+- **Cattle Management:** Add and manage cow details, including name, breed, and active status.
+- **Profit & Loss Calculation:** View monthly income, expenses, net profit or loss, and milk sales summary.
+- **Monthly Reports:** Generate PDF reports and share them through WhatsApp or other applications.
+- **Milk Calendar:** Maintain daily milk records and view milk-related activities.
+- **Vaccination Tracking:** Organize cattle vaccination schedules.
+- **Daily Reminders:** Receive notifications for daily dairy-related activities.
+- **Multilingual Support:** Supports English, Kannada, Hindi, and Marathi.
+- **Dark Mode:** Includes a dark theme for a comfortable viewing experience.
+- **Offline Support:** Store and access records locally without requiring an internet connection.
 
-The app follows **MVVM** with a repository layer:
+## 🛠️ Technology Stack
 
-```
-Compose Screens (UI)
-      │  observe StateFlow
-      ▼
-ViewModel (FarmViewModel, AuthViewModel, ThemeViewModel)
-      │
-      ▼
-FarmRepository
-      │
-      ▼
-Room DAOs (MilkDao, ExpenseDao, CowDao) ──► SQLite (ksheera_sagara_db)
-```
-
-- **Room** entities: `MilkEntry`, `ExpenseEntry`, `CowEntry`
-- **Kotlin Flow and StateFlow** keep the UI in sync with the database
-- **DataStore (Preferences)** stores settings such as language, theme and onboarding state
-- **WorkManager** schedules the daily reminder notification
-- **PdfDocument and FileProvider** generate and share the monthly report
-
-## 🛠️ Tech Stack
-
-| Area | Tools |
+| Category | Technologies |
 |---|---|
-| Language | Kotlin |
-| UI | Jetpack Compose, Material 3, Navigation Compose |
-| Local database | Room 2.6.1 (KSP) |
-| Async | Coroutines, Flow |
-| Storage | DataStore Preferences |
-| Background work | WorkManager |
-| Min / Target SDK | 24 / 34 |
+| Programming Language | Kotlin |
+| UI Development | Jetpack Compose |
+| UI Components | Material 3 |
+| Architecture | MVVM |
+| Local Database | Room Database (SQLite) |
+| Asynchronous Operations | Kotlin Coroutines, Flow |
+| Navigation | Navigation Compose |
+| Preferences | DataStore |
+| Background Tasks | WorkManager |
+| PDF Generation | Android PdfDocument |
+| Development Tool | Android Studio |
+
+## 🏗️ Application Architecture
+
+The application follows the Model-View-ViewModel (MVVM) architecture with a repository layer.
+
+```text
+Compose UI Screens
+       |
+       v
+    ViewModel
+       |
+       v
+ Farm Repository
+       |
+       v
+ Room Database
+       |
+       v
+    SQLite
+```
+
+**Architecture components:**
+- **UI Layer:** Jetpack Compose screens for user interaction.
+- **ViewModel Layer:** Manages UI state and application logic.
+- **Repository Layer:** Handles data operations.
+- **Data Layer:** Room entities and DAOs manage local database operations.
+- **DataStore:** Stores user preferences such as language and theme settings.
+- **WorkManager:** Schedules background reminders.
 
 ## 📂 Project Structure
 
-```
+```text
 app/src/main/java/com/ksheera/sagaraaa/
-├── data/          # Room entities, DAOs, AppDatabase, UserPreferences
-├── repository/    # FarmRepository
-├── viewmodel/     # FarmViewModel, AuthViewModel, ThemeViewModel
-├── ui/theme/      # Compose screens and theme
-├── utils/         # LanguageManager, AppPreferences
+│
+├── data/
+│   ├── entities
+│   ├── dao
+│   └── AppDatabase
+│
+├── repository/
+│   └── FarmRepository
+│
+├── viewmodel/
+│   ├── FarmViewModel
+│   ├── AuthViewModel
+│   └── ThemeViewModel
+│
+├── ui/
+│   └── theme/
+│
+├── utils/
+│
 ├── PdfExporter.kt
 ├── NotificationHelper.kt
 └── MainActivity.kt
@@ -66,25 +92,36 @@ app/src/main/java/com/ksheera/sagaraaa/
 
 ## 🚀 Getting Started
 
-1. Clone the repo
-   ```bash
-   git clone https://github.com/ManishaNaik1111/KsheeraSagaraaa.git
-   ```
-2. Open it in **Android Studio** (Hedgehog or newer)
-3. Let Gradle sync, then run on an emulator or a device with Android 7.0 (API 24) or higher
+### Prerequisites
+- Android Studio (Hedgehog or newer)
+- Android SDK
+- Android device or emulator running Android 7.0 (API 24) or above
 
-## 📸 Screenshots
+### Installation
 
-_Screenshots coming soon._
+1. Clone the repository:
 
-## 🔮 Future Improvements
+```bash
+git clone https://github.com/ManishaNaik1111/KsheeraSagaraaa.git
+```
 
-- Replace destructive database migrations with proper Room migrations
-- Hash stored passwords or move sign-in to a secure backend
-- Cloud backup and sync across devices
-- AI-powered tips based on a farmer's own income and expense data
+2. Open the project in Android Studio.
+3. Allow Gradle to sync the project.
+4. Run the application on an Android emulator or physical device.
 
-## 👩‍💻 Author
+## 🔮 Future Enhancements
+
+- Cloud backup and data synchronization.
+- Improved database migration support.
+- Enhanced account security.
+- Personalized financial insights for dairy farmers.
+
+## 👩‍💻 Developer
 
 **Manisha Mahesh Naik**
-GitHub: [@ManishaNaik1111](https://github.com/ManishaNaik1111) · [LinkedIn](https://linkedin.com/in/manisha-naik-83270a2a0)
+
+- GitHub: [ManishaNaik1111](https://github.com/ManishaNaik1111)
+
+---
+
+*Developed as an individual Android application project.*
